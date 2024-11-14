@@ -17,7 +17,7 @@ ENTITY pacman_state_machine IS
 END pacman_state_machine;
 
 ARCHITECTURE Behavioral OF pacman_state_machine IS
-	TYPE state_type IS (IDLE, MOVING, EATING, ESCAPING, GAME_OVER);
+	TYPE state_type IS (IDLE, MOVING, EATING, EATING_GHOST, ESCAPING, GAME_OVER);
 	SIGNAL state, next_state : state_type;
 BEGIN
 
@@ -47,8 +47,8 @@ BEGIN
 					next_state <= EATING;
 				ELSIF ghost_near = '1' AND power_pellet = '0' THEN
 					next_state <= ESCAPING;
-				ELSIF power_pellet = '1' THEN
-					next_state <= EATING;
+				ELSIF ghost_near = '1' AND power_pellet = '1' THEN
+					next_state <= EATING_GHOST;
 				ELSE
 					next_state <= MOVING;
 				END IF;
