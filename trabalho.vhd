@@ -95,6 +95,10 @@ BEGIN
 				game_over <= '1';
 				state_out <= "100";
 
+			WHEN EATING_GHOST =>
+				game_over <= '1';
+				state_out <= "100";
+
 			WHEN OTHERS =>
 				game_over <= '0';
 				state_out <= "000";
